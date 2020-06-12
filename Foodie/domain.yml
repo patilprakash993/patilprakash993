@@ -109,3 +109,4 @@ actions:
 - utter_change_location
 - utter_change_price
 - utter_change_cuisine
+- action_send_email
