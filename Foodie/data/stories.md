@@ -1,11 +1,33 @@
 ## Happy path1
 * greet
     - utter_greet
-* restaurant_search{"location": "delhi","cuisine": "chinese","price": "300"}
+* restaurant_search{"location": "delhi","cuisine": "chinese","price": "300","email": "xyz@asd.com"}
+	- slot{"location": "delhi"}
+	- slot{"cuisine": "chinese"}
+	- slot{"price": "300"}
+	- slot{"email": "xyz@asd.com"}
 	- action_search_restaurants
+	- slot {"address":"No result found"}
+	- action_send_email
+	- utter_email_sent
 * affirm
     - utter_goodbye
-    - export
+
+## Happy path2
+* greet
+    - utter_greet
+* restaurant_search{"location": "delhi","cuisine": "chinese","price": "300"}
+	- action_search_restaurants
+	- slot {"address":"No result found"}
+	- utter_ask_email_details
+* affirm
+	- utter_ask_email_address
+* restaurant_search{"email": "xyz@asd.com"}
+	- slot {"email": "xyz@asd.com"}
+    - action_send_email
+    - utter_email_sent
+    - utter_goodbye
+
 	
 ## Happy path2
 * greet
@@ -17,10 +39,14 @@
 * restaurant_search{"price": "300"}
 	- slot{"price": "399"}
 	- action_search_restaurants
-	- slot {"address":"No result found"}
+	- utter_ask_email_details
 * affirm
+	- utter_ask_email_address
+* restaurant_search{"email": "xyz@asd.com"}
+	- slot {"email": "xyz@asd.com"}
+    - action_send_email
+    - utter_email_sent
     - utter_goodbye
-    - export
 
 
 ## complete path

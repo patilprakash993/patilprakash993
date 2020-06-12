@@ -82,7 +82,7 @@
 - [Mumbai](location)
 - [Pune](location)
 
-## intent:ask_budget
+## intent:Pricing
 - I want to eat at a place between 300 and 700
 - I am fine with an expensive place
 - I am looking for a dinner place at less than 300

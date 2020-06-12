@@ -1,9 +1,10 @@
 intents:
 - affirm
-- restaurant_search
-- greet
 - goodbye
-- stop
+- greet
+- inform
+- Pricing
+- restaurant_search
 
 entities:
 - cuisine
@@ -96,7 +97,12 @@ templates:
   - text: hey there! How may i help you
   - text: Hi, How can I help you!
   - text: Hey, How is it going. How May I help you Today
-   
+   utter_ask_email_details:
+   - text: can i send an email with top 10 restaurant details?
+   utter_ask_email_address:
+   - text: Can you type your email address?
+   utter_email_sent:
+   - text: Email Sent, Thank you.
 actions:
 - action_search_restaurants
 - utter_ask_cuisine
@@ -109,4 +115,7 @@ actions:
 - utter_change_location
 - utter_change_price
 - utter_change_cuisine
+- utter_ask_email_details
+- utter_ask_email_address
+- utter_email_sent
 - action_send_email

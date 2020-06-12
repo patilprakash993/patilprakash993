@@ -44,18 +44,18 @@ class ActionSendEmail(Action):
 
 	def run(self, dispatcher, tracker, domain):
 		to_email = tracker.get_slot('email')
-        email_body = tracker.get_slot('email_body')
-        from_email = ''
-        pwd = ''       
+		email_body = tracker.get_slot('email_body')
+		from_email = ''
+		pwd = ''       
 		s = smtplib.SMTP('smtp.gmail.com', 587) 
-        s.starttls()
-        s.login('from_email', 'pass')
+		s.starttls()
+		s.login('from_email', 'pass')
 		msg = EmailMessage()
-        msg['From'] = from_email
-        msg['To'] =to_email
-        msg['Subject'] = "Details of TOP 10 Resturants \n \n"
-        msg.set_content(email_body)
-        
+		msg['From'] = from_email
+		msg['To'] =to_email
+		msg['Subject'] = "Details of TOP 10 Resturants \n \n"
+		msg.set_content(email_body)
+
 		try:
 			s.sendmail(from_email, strip(str(to_email)), message)
 			s.quit()
