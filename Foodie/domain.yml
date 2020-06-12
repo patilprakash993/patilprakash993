@@ -10,8 +10,9 @@ entities:
 - cuisine
 - location
 - price
-- people
 - address
+- email
+- email_body
 
 slots:
   cuisine:
@@ -24,8 +25,6 @@ slots:
      - Lesser than Rs. 300
      - Rs. 300 to 700   
      - More than 700 
-  people:
-    type: text
   email:
     type: text
   email_body:
