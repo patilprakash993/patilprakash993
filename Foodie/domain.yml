@@ -1,0 +1,111 @@
+intents:
+- affirm
+- restaurant_search
+- greet
+- goodbye
+- stop
+
+entities:
+- cuisine
+- location
+- price
+- people
+- address
+
+slots:
+  cuisine:
+    type: text
+  location:
+    type: text
+  price:
+    type: categorical
+    values:
+     - Lesser than Rs. 300
+     - Rs. 300 to 700   
+     - More than 700 
+  people:
+    type: text
+  email:
+    type: text
+  email_body:
+    type: text
+  address:
+    type: unfeaturized  
+    
+templates:
+  utter_ask_cuisine:
+  - buttons:
+    - payload: Chinese
+      title: Chinese
+    - payload: Mexican
+      title: Mexican
+    - payload: Italian
+      title: Italian
+    - payload: American
+      title: American
+    - payload: South Indian
+      title: South Indian
+    - payload: North Indian
+      title: North Indian
+    text: what kind of cuisine would you like?
+  utter_change_cuisine:
+  - buttons:
+    - payload: Chinese
+      title: Chinese
+    - payload: Mexican
+      title: Mexican
+    - payload: Italian
+      title: Italian
+    - payload: American
+      title: American
+    - payload: South Indian
+      title: South Indian
+    - payload: North Indian
+      title: North Indian
+    text: what kind of cuisine would you like?
+   utter_change_location:
+  - text: In what location?
+  utter_ask_location:
+  - text: In what location?
+  utter_ask_price:
+  - buttons:
+    - payload: Lesser than Rs. 300
+      title: Lesser than Rs. 300
+    - payload: Rs. 300 to 700
+      title: Rs. 300 to 700
+    - payload: More than 700
+      title: More than 700
+    text:What price range are you looking at (Consider average budget for 2 people)?
+  utter_change_price:
+  - buttons:
+    - payload: Lesser than Rs. 300
+      title: Lesser than Rs. 300
+    - payload: Rs. 300 to 700
+      title: Rs. 300 to 700
+    - payload: More than 700
+      title: More than 700
+    text: What price range are you looking at (Consider average budget for 2 people)?
+  utter_ask_howcanhelp:
+  - text: how can I help you?
+  utter_default:
+  - text: i cannot understand
+  utter_goodbye:
+  - text: goodbye :(
+  - text: Bye-bye
+  utter_greet:
+  - text: hey there! How may i help you
+  - text: Hi, How can I help you!
+  - text: Hey, How is it going. How May I help you Today
+   
+actions:
+- action_search_restaurants
+- utter_ask_cuisine
+- utter_ask_howcanhelp
+- utter_ask_location
+- utter_default
+- utter_goodbye
+- utter_greet
+- utter_ask_price
+- utter_change_location
+- utter_change_price
+- utter_change_cuisine
