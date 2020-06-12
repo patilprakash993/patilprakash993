@@ -37,3 +37,28 @@ class ActionSearchRestaurants(Action):
 		dispatcher.utter_message("-----"+response)
 		return [SlotSet('address',response)]
 
+# Send email the list of 10 restaurants
+class ActionSendEmail(Action):
+	def name(self):
+		return 'action_send_email'
+
+	def run(self, dispatcher, tracker, domain):
+		to_email = tracker.get_slot('email')
+        email_body = tracker.get_slot('email_body')
+        from_email = ''
+        pwd = ''       
+		s = smtplib.SMTP('smtp.gmail.com', 587) 
+        s.starttls()
+        s.login('from_email', 'pass')
+		msg = EmailMessage()
+        msg['From'] = from_email
+        msg['To'] =to_email
+        msg['Subject'] = "Details of TOP 10 Resturants \n \n"
+        msg.set_content(email_body)
+        
+		try:
+			s.sendmail(from_email, strip(str(to_email)), message)
+			s.quit()
+		except:
+			dispatcher.utter_message(email)		
+		return []
