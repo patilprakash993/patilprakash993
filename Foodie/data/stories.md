@@ -13,6 +13,23 @@
 * affirm
     - utter_goodbye
 
+## Happy path1
+* greet
+    - utter_greet
+* restaurant_search{"location": "delhi","cuisine": "chinese","price": "300","email": "xyz@asd.com"}
+	- slot{"location": "delhi"}
+	- slot{"cuisine": "chinese"}
+	- slot{"price": "300"}
+	- slot{"email": "xyz@asd.com"}
+	- action_check_location
+	- slot{"location_check": "One"}
+	- action_search_restaurants
+	- slot {"address":"No result found"}
+	- action_send_email
+	- utter_email_sent
+* affirm
+    - utter_goodbye
+	
 ## Happy path2
 * greet
     - utter_greet

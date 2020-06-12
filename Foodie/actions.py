@@ -11,6 +11,8 @@ import smtplib
 # Import the email modules we'll need
 from email.message import EmailMessage
 
+
+
 class ActionSearchRestaurants(Action):
 	def name(self):
 		return 'action_search_restaurants'
@@ -20,6 +22,7 @@ class ActionSearchRestaurants(Action):
 		zomato = zomatopy.initialize_app(config)
 		loc = tracker.get_slot('location')
 		cuisine = tracker.get_slot('cuisine')
+		price = tracker.get_slot('price')
 		location_detail=zomato.get_location(loc, 1)
 		d1 = json.loads(location_detail)
 		lat=d1["location_suggestions"][0]["latitude"]
@@ -33,7 +36,7 @@ class ActionSearchRestaurants(Action):
 		else:
 			for restaurant in d['restaurants']:
 				response=response+ "Found "+ restaurant['restaurant']['name']+ " in "+ restaurant['restaurant']['location']['address']+"\n"
-		
+		print(response)
 		dispatcher.utter_message("-----"+response)
 		return [SlotSet('address',response)]
 
@@ -62,3 +65,30 @@ class ActionSendEmail(Action):
 		except:
 			dispatcher.utter_message(email)		
 		return []
+
+
+# Tier 1 and Tier 2 cities
+cities_t1_t2 = ['Ahmedabad','Bangalore','Chennai','Delhi','Hyderabad','Kolkata','Mumbai','Pune','Agra','Ajmer','Aligarh','Amravati','Amritsar',
+'Asansol','Aurangabad','Bareilly','Belgaum','Bhavnagar','Bhiwandi','Bhopal','Bhubaneswar','Bikaner','Bilaspur','Bokaro Steel City','Chandigarh',
+'Coimbatore','Cuttack','Dehradun','Dhanbad','Bhilai','Durgapur','Erode','Faridabad','Firozabad','Ghaziabad','Gorakhpur','Gulbarga','Guntur',
+'Gwalior','Gurgaon','Guwahati','Hamirpur','Hubli–Dharwad','Indore','Jabalpur','Jaipur','Jalandhar','Jammu','Jamnagar','Jamshedpur','Jhansi',
+'Jodhpur','Kakinada','Kannur','Kanpur','Kochi','Kolhapur','Kollam','Kozhikode','Kurnool','Ludhiana','Lucknow','Madurai','Malappuram','Mathura',
+'Goa','Mangalore','Meerut','Moradabad','Mysore','Nagpur','Nanded','Nashik','Nellore','Noida','Patna','Pondicherry','Purulia Prayagraj','Raipur',
+'Rajkot','Rajahmundry','Ranchi','Rourkela','Salem','Sangli','Shimla','Siliguri','Solapur','Srinagar','Surat','Thiruvananthapuram','Thrissur',
+'Tiruchirappalli','Tiruppur','Ujjain','Bijapur','Vadodara','Varanasi','Vasai-Virar City','Vijayawada','Visakhapatnam','Vellore', 'Warangal']
+cities_t1_t2 = [city.lower() for city in cities_t1_t2]
+
+class ActionCheckLocation(Action):
+	def name(self):
+		return 'action_search_restaurants'
+	
+	def run(self, dispatcher, tracker, domain):
+		city = tracker.get_slot('location')
+		city = strip(str(city))
+		if city.lower() in cities_t1_t2:
+			return [SlotSet('location_check',"one")]
+		else:
+			return [SlotSet('location_check',"zero")]
+			
+
+
